@@ -1,0 +1,99 @@
+{
+ "_doc": "Réglages de kaggle/outils/samedi_v3.py (20/11 au soir). Repère du proxy : reve_d (3 passes, perte normalisée), rang percentile agrégé 0,7681 (reve_c 0,7636, revef_c 0,7640 : la dispersion entre recettes voisines est de ~0,004). Décisions du 20/11 au soir (21 h 30) : conv à 22 % (canaux aberrants mis à zéro), pas de retrait de dérive, alignement des REVE sur la moyenne du lot à force adaptative (sans empreinte de sujet). Heure limite d'attente portée de 12:25 à 13:00 : avec le lancement automatique de 01:10, le second noyau finit vers 12:17 au plus tard (10,9 h + copie des données) avant l'enregistrement de ses sorties ; l'attente s'arrête de toute façon dès que les deux noyaux sont finis. Pari B changé le 20/11 à 22 h 40 : « nbm » = recette du pari A + moyenne d'essais de la même image (--mix 0.5 --mixk 6), à la place du tronc à 3e-5 (nbg) ; même arbitrage par son proxy nbm_p.",
+ "kernels": [
+  "train_sat_b",
+  "train_sat_a"
+ ],
+ "deadline": "13:00",
+ "max_reve": 12,
+ "fill_to": 12,
+ "conv": [
+  "final_fast_aug_gsoft",
+  "final_fast_aug_gsoft_nocar_s1",
+  "final_things_lag_gsoft",
+  "final_things_lag_gsoft_s1"
+ ],
+ "conv_share": 0.22,
+ "combine": "rawsum",
+ "gamma": 1.0,
+ "bets": {
+  "nba": {
+   "label": "pari A",
+   "pat": "final_nba_s\\d+(_r)?",
+   "proxy": "nba_p",
+   "epochs": [
+    3,
+    5
+   ],
+   "ref": 0.7681,
+   "margin": 0.008,
+   "double": 0.006,
+   "missing": "minoritaire",
+   "cap": 3
+  },
+  "nbm": {
+   "label": "pari B",
+   "pat": "final_nbm_s\\d+(_r)?",
+   "proxy": "nbm_p",
+   "epochs": [
+    3,
+    5
+   ],
+   "ref": 0.7681,
+   "margin": 0.008,
+   "double": 0.006,
+   "missing": "minoritaire",
+   "cap": 3
+  }
+ },
+ "base_priority": [
+  "revef_c",
+  "final_reve_c_s2",
+  "final_reve_s0",
+  "final_reve_s1",
+  "final_revef_c_s10",
+  "final_reve_d_s7"
+ ],
+ "fill_old": [
+  "revef_c@best",
+  "final_reve_c_s2",
+  "final_reve_s0",
+  "final_reve_s1",
+  "final_revef_c_s10",
+  "final_reve_d_s7",
+  "final_reve_d4_s9",
+  "final_revef_s3",
+  "final_reve_d_s4",
+  "final_revef_d_s8",
+  "final_revef_d_s5"
+ ],
+ "health": {
+  "ft": {
+   "first_max": 7.66,
+   "last_max": 7.66,
+   "cv_min": 0.03,
+   "cv_max": 2.0,
+   "_doc": "xr_ft_d (proxy) : 7,598 ; finals : attendu 7,25 à 7,45 ; décroché : 7,8 et plus"
+  },
+  "nb": {
+   "first_max": 4.158,
+   "last_max": 4.13,
+   "cv_min": 0.03,
+   "cv_max": 3.0,
+   "_doc": "entropie croisée à 64 candidats : le hasard vaut ln 64 = 4,159 ; reve_d affiné avec cette perte : 3,80"
+  }
+ },
+ "secours_raw": [
+  "xr_ft_d@best",
+  "xr_scratch@best"
+ ],
+ "detrend": false,
+ "conv_zero": 2.5,
+ "align": {
+  "K": 0,
+  "lam": 1.0,
+  "tau": 0.0,
+  "min": 32,
+  "js": true
+ }
+}
